@@ -5,8 +5,6 @@ import { app } from "./app.js";
 
 dotenv.config();
 
-const __dirname = path.resolve();
-
 dotenv.config({
   path: "./.env",
 });
