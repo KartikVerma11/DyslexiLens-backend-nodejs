@@ -4,9 +4,10 @@ import { v2 as cloudinary } from "cloudinary";
 
 const imagePrediction = async (req, res) => {
   try {
-    const { text } = req.body; // Extract 'text' from request body
-    console.log("text:", text) ; 
-
+    const { text, flag = null } = req.body; // Corrected 'Null' to 'null'
+    console.log("text:", text);
+    console.log("flag:", flag);
+    
     // var myHeaders = new Headers();
     // myHeaders.append("apikey", "I6WIDHSqFTkrapsMfS1HwbAyJPszUkcd");
 
@@ -29,7 +30,9 @@ const imagePrediction = async (req, res) => {
       throw new Error("IMAGE_URL is not defined in environment variables");
     }
 
-    const response = await axios.post(resultUrl, { text }, {
+    const payload = flag !== null ? { text, flag } : { text };
+
+    const response = await axios.post(resultUrl, payload, {
       headers: { "Content-Type": "application/json" }
     });
 
